@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Stygian_Blade.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

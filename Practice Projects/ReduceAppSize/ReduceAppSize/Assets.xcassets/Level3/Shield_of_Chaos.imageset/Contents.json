@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Shield_of_Chaos.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

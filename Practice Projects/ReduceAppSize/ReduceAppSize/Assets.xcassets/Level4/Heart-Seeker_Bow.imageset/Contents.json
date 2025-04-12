@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Heart-Seeker_Bow.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
