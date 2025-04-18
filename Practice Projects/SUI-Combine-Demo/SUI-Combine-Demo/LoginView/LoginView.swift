@@ -28,21 +28,14 @@ struct LoginView: View {
             Image(systemName: "paperplane.fill")
                 .foregroundStyle(.yellow)
             
-            TextField("Enter UserName", text: $viewModel.userName)
-            TextField("Enter Password", text: $viewModel.password)
-                .textContentType(.password)
-                
+
+            customViewSignUpOrLogIn(isLogin: viewModel.isLogin)
             
-            Button("Log In") {
-                Task {
-                    await viewModel.validateLogin()
-                }
+            MyStack {
+                Text("View 1")
+                Text("View 2")
             }
-            .alert("Login failed", isPresented: $viewModel.showAlert) {
-            }
-            .onChange(of: viewModel.isSuccess) {
-                authManager.login()
-            }
+
 
         }
         .padding(20)
@@ -51,8 +44,78 @@ struct LoginView: View {
         
         
     }
+    
+    @ViewBuilder
+    func customViewSignUpOrLogIn(isLogin: Bool) -> some View {
+        VStack(spacing: 20) {
+            if isLogin {
+                TextField("Enter UserName", text: $viewModel.userName)
+                TextField("Enter Password", text: $viewModel.password)
+                    .textContentType(.password)
+                
+                Button("Log In") {
+                    Task {
+                        await viewModel.validateLogin()
+                    }
+                }
+                .customButtonStyle1()
+    //            .modifier(CustomButtonStyle1())
+                .alert("Login failed", isPresented: $viewModel.showAlert) {
+                }
+                .onChange(of: viewModel.isSuccess) {
+                    authManager.login()
+                }
+            } else {
+                TextField("Enter Preferred UserName", text: $viewModel.preferredUserName)
+                TextField("Enter MailID", text: $viewModel.emailId)
+                
+                Button("Sign Up") {
+                    Task {
+                        await viewModel.validateLogin()
+                    }
+                }
+                .customButtonStyle2()
+    //            .modifier(CustomButtonStyle2())
+                .alert("Login failed", isPresented: $viewModel.showAlert) {
+                }
+                .onChange(of: viewModel.isSuccess) {
+                    authManager.login()
+                }
+            }
+        }
+    }
 }
 
 #Preview {
     LoginView(viewModel: LoginViewModel())
+}
+
+
+//Example for  @ViewBuilders
+struct MyStack<Content: View>: View {
+    let content: () -> Content
+    
+    init(@ViewBuilder content: @escaping () -> Content) { // let us create multiple view in a closure
+//    init(content: @escaping () -> Content) { // only able to create one view
+        self.content = content
+    }
+
+    var body: some View {
+        VStack {
+            content()
+        }
+    }
+    
+    /*
+     // Single view creation:
+     MyStack {
+         Text("123")
+     }
+     
+     // Multiple view creation:
+     MyStack {
+         Text("123")
+         Text("321")
+     }
+     */
 }
