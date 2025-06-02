@@ -61,6 +61,12 @@ let sum: (Int, Int) -> Int = { (a, b) in
 
 print(sum(5, 3))  // Output: 8
 
+
+var sum2: (Int, Int) -> Int
+sum2 = sum
+
+print(sum(2, 2))  // Output: 4
+
 // 4️⃣ Trailing Closures
 
 
@@ -92,6 +98,12 @@ func checkIfTrue1(_ condition: @autoclosure () -> Void, _ message: @autoclosure 
     condition()
 //    message()
 }
+
+checkIfTrue1((
+    print("checkIfTrue1 -- condition - 1")
+), (
+    print("checkIfTrue1 -- message - 1")
+))
 
 checkIfTrue1({
     print("checkIfTrue1 -- condition")

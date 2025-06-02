@@ -49,6 +49,7 @@ struct LoginView: View {
     func customViewSignUpOrLogIn(isLogin: Bool) -> some View {
         VStack(spacing: 20) {
             if isLogin {
+                Text("Heart")
                 TextField("Enter UserName", text: $viewModel.userName)
                 TextField("Enter Password", text: $viewModel.password)
                     .textContentType(.password)
@@ -66,6 +67,7 @@ struct LoginView: View {
                     authManager.login()
                 }
             } else {
+                Image(systemName: "heart").foregroundStyle(.red)
                 TextField("Enter Preferred UserName", text: $viewModel.preferredUserName)
                 TextField("Enter MailID", text: $viewModel.emailId)
                 
